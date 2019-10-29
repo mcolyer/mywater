@@ -35,6 +35,9 @@ func main() {
 	username := os.Getenv("USERNAME")
 	password := os.Getenv("PASSWORD")
 	date := os.Getenv("DATE")
+	if len(date) == 0 {
+		date = time.Now().AddDate(0, 0, -1).Format("01-02-2006")
+	}
 	body := []byte(`{"username":"` + username + `","password":"` + password + `","rememberme":true,"calledFrom":"LN"}`)
 	err := login.PostRaw(BASE_URL+"/Portal/Default.aspx/validateLogin", body)
 
